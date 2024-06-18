@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  projectb_mongodb:
+    build: ./mongo
+    restart: always
+    logging:
+      driver: none
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: projectb-interview
+    ports:
+      - 27017:27017
