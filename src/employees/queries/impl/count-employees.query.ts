@@ -1,4 +1,3 @@
 import { IQuery } from '@nestjs/cqrs';
 
-export class CountEmployeesQuery implements IQuery {
-}
+export class CountEmployeesQuery implements IQuery {}

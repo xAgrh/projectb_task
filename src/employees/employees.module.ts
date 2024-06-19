@@ -9,12 +9,12 @@ import { EmployeesQueryHandlers } from './queries/handlers';
 import { EmployeesEventHandlers } from './events/handlers';
 import { CqrsModule } from '@nestjs/cqrs';
 import { UtilsModule } from '../commons/helpers/utils.module';
-import { EmailsModule } from '../emails-handling/email.module';
-
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Employee.name, schema: EmployeeSchema }]),
+    MongooseModule.forFeature([
+      { name: Employee.name, schema: EmployeeSchema },
+    ]),
     CqrsModule,
     UtilsModule,
   ],

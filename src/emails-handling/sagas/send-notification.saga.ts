@@ -12,8 +12,13 @@ export class SendNotificationSaga {
     return events$.pipe(
       ofType(EmployeeCreatedSuccessEvent),
       map((event: EmployeeCreatedSuccessEvent) => {
-        return new AddMailJobToQueueCommand(event._id, event.employee.email, event.employee.firstName, event.employee.lastName);
+        return new AddMailJobToQueueCommand(
+          event._id,
+          event.employee.email,
+          event.employee.firstName,
+          event.employee.lastName,
+        );
       }),
     );
-  }
+  };
 }

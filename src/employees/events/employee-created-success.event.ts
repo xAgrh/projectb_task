@@ -1,4 +1,4 @@
-import { CreateEmployeeDto } from "../dto/create-employee.dto";
+import { CreateEmployeeDto } from '../dto/create-employee.dto';
 
 export class EmployeeCreatedSuccessEvent {
   constructor(

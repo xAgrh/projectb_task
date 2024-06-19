@@ -1,5 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNumberString, IsString } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class BrowsePaginatedFEQuery {
   @ApiProperty({
@@ -14,7 +13,6 @@ export class BrowsePaginatedFEQuery {
     required: false,
     description: 'On which page you are currently',
   })
-  @IsNumberString()
   page: number;
 
   @ApiProperty({
@@ -22,7 +20,6 @@ export class BrowsePaginatedFEQuery {
     required: false,
     description: 'How many results you want to see for a specific page',
   })
-  @IsNumberString()
   limit: number;
 }
 

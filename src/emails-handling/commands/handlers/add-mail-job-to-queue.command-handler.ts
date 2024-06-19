@@ -4,8 +4,9 @@ import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
 
 @CommandHandler(AddMailJobToQueueCommand)
-export class AddMailJobToQueueCommandHandler implements ICommandHandler<AddMailJobToQueueCommand> {
-
+export class AddMailJobToQueueCommandHandler
+  implements ICommandHandler<AddMailJobToQueueCommand>
+{
   constructor(@InjectQueue('email') private readonly emailQueue: Queue) {}
 
   async execute(command: AddMailJobToQueueCommand) {
@@ -17,7 +18,7 @@ export class AddMailJobToQueueCommandHandler implements ICommandHandler<AddMailJ
     });
 
     return {
-      jobId: job.id
-    }
+      jobId: job.id,
+    };
   }
 }

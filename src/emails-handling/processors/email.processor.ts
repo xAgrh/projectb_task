@@ -10,7 +10,9 @@ export class EmailConsumer {
   constructor(private readonly mailerService: MailerService) {}
 
   @Process()
-  async sendEmail(job: Job<{ email: string; firstName: string; lastName: string }>) {
+  async sendEmail(
+    job: Job<{ email: string; firstName: string; lastName: string }>,
+  ) {
     const { data } = job;
     const { email, firstName, lastName } = data;
 
@@ -20,7 +22,7 @@ export class EmailConsumer {
       subject: 'Welcome!',
       template: 'email', // Name of the email template (create the template in the 'templates' folder)
       context: {
-        body: `Welcome to a system ${firstName} ${lastName}`
+        body: `Welcome to a system ${firstName} ${lastName}`,
       },
     });
   }

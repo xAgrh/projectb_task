@@ -8,7 +8,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import nodemailer from './config/nodemailer';
 import database from './config/database';
 import { BullModule } from '@nestjs/bull';
-import { EmailConsumer } from './emails-handling/processors/email.processor';
 import { EmailsModule } from './emails-handling/email.module';
 
 @Module({

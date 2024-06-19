@@ -1,5 +1,3 @@
-import { AddMailJobToQueueCommandHandler } from "./add-mail-job-to-queue.command-handler";
+import { AddMailJobToQueueCommandHandler } from './add-mail-job-to-queue.command-handler';
 
-export const EmailsCommandHandlers = [
-  AddMailJobToQueueCommandHandler,
-];
+export const EmailsCommandHandlers = [AddMailJobToQueueCommandHandler];

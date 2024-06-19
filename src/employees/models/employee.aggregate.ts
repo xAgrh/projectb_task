@@ -1,5 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { Employee } from './employee.schema';
+import { plainToClassFromExist } from 'class-transformer';
 
 export class EmployeeAggregate extends AggregateRoot {
   _id: string;
@@ -16,6 +17,6 @@ export class EmployeeAggregate extends AggregateRoot {
 
   constructor(data?: Partial<Employee>) {
     super();
+    plainToClassFromExist(this, data);
   }
-
 }

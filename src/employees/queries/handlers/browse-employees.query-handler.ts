@@ -5,7 +5,9 @@ import { Employee } from '../../models/employee.schema';
 import { EmployeesRepository } from '../../../employees/repositories/employees.repository';
 
 @QueryHandler(BrowseEmployeesQuery)
-export class BrowseEmployeesQueryHandler implements IQueryHandler<BrowseEmployeesQuery> {
+export class BrowseEmployeesQueryHandler
+  implements IQueryHandler<BrowseEmployeesQuery>
+{
   private logger: Logger = new Logger(this.constructor.name);
   constructor(private repository: EmployeesRepository) {}
 

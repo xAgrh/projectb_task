@@ -21,7 +21,14 @@ export class EmployeesRepository {
     try {
       const createdEmployee = new this.employeeModel(createEmployeeDto);
       await createdEmployee.save();
-      this.publishEvent(createdEmployee, new EmployeeCreatedSuccessEvent(createEmployeeDto._id, createEmployeeDto, source));
+      this.publishEvent(
+        createdEmployee,
+        new EmployeeCreatedSuccessEvent(
+          createEmployeeDto._id,
+          createEmployeeDto,
+          source,
+        ),
+      );
     } catch (error) {
       // Due to YAGNI principle we most probably don't want to create failure event if data are not saved to the db.
       // this.publishEvent(data, new EmployeeCreatedFailureEvent(data._id, data, error, reason));
@@ -69,10 +76,9 @@ export class EmployeesRepository {
   }
 
   update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
-    return this.employeeModel.updateOne(
-      { _id: id },
-      { $set: updateEmployeeDto }
-    ).exec();
+    return this.employeeModel
+      .updateOne({ _id: id }, { $set: updateEmployeeDto })
+      .exec();
   }
 
   delete(id: string) {

@@ -3,12 +3,12 @@ import { EmployeesRepository } from '../../../employees/repositories/employees.r
 import { DeleteEmployeeCommand } from '../impl/delete-employee.command';
 
 @CommandHandler(DeleteEmployeeCommand)
-export class DeleteEmployeeCommandHandler implements ICommandHandler<DeleteEmployeeCommand> {
-
+export class DeleteEmployeeCommandHandler
+  implements ICommandHandler<DeleteEmployeeCommand>
+{
   constructor(private repository: EmployeesRepository) {}
 
   async execute(command: DeleteEmployeeCommand) {
-
     const { _id } = command;
 
     this.repository.delete(_id);

@@ -1,11 +1,12 @@
-import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateEmployeeCommand } from '../impl/create-employee.command';
 import { nanoid } from 'nanoid';
 import { EmployeesRepository } from '../../../employees/repositories/employees.repository';
 
 @CommandHandler(CreateEmployeeCommand)
-export class CreateEmployeeCommandHandler implements ICommandHandler<CreateEmployeeCommand> {
-
+export class CreateEmployeeCommandHandler
+  implements ICommandHandler<CreateEmployeeCommand>
+{
   constructor(private repository: EmployeesRepository) {}
 
   async execute(command: CreateEmployeeCommand) {
@@ -16,7 +17,7 @@ export class CreateEmployeeCommandHandler implements ICommandHandler<CreateEmplo
     employee._id = employee._id ? employee._id : _id;
 
     // We can define from which source entity was created
-    const source = 'REST'
+    const source = 'REST';
 
     this.repository.create(employee, source);
 

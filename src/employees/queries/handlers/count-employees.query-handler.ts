@@ -4,11 +4,13 @@ import { EmployeesRepository } from '../../repositories/employees.repository';
 import { CountEmployeesQuery } from '../impl/count-employees.query';
 
 @QueryHandler(CountEmployeesQuery)
-export class CountEmployeesQueryHandler implements IQueryHandler<CountEmployeesQuery> {
+export class CountEmployeesQueryHandler
+  implements IQueryHandler<CountEmployeesQuery>
+{
   private logger: Logger = new Logger(this.constructor.name);
   constructor(private repository: EmployeesRepository) {}
 
-  async execute(query: CountEmployeesQuery): Promise<number> {
+  async execute(): Promise<number> {
     try {
       return this.repository.count();
     } catch (error) {

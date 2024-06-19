@@ -18,19 +18,24 @@ export class EmployeesService {
   constructor(
     private commandBus: CommandBus,
     private queryBus: QueryBus,
-  ) { }
+  ) {}
 
   create(createEmployeeDto: CreateEmployeeDto): Promise<void> {
     return this.executeCommand(new CreateEmployeeCommand(createEmployeeDto));
   }
 
-  async findAll(query: DbPaginatedQuery): Promise<any> { // total count number also required for proper pagination
-    const result: Array<Employee> = await this.executeQuery(new BrowseEmployeesQuery(query));
+  async findAll(query: DbPaginatedQuery): Promise<any> {
+    // total count number also required for proper pagination
+    const result: Array<Employee> = await this.executeQuery(
+      new BrowseEmployeesQuery(query),
+    );
     return result;
   }
 
   async findOne(_id: string): Promise<Employee> {
-    const result: Employee = await this.executeQuery(new ReadEmployeesQuery(_id));
+    const result: Employee = await this.executeQuery(
+      new ReadEmployeesQuery(_id),
+    );
     return result;
   }
 
