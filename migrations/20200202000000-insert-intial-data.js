@@ -5,43 +5,43 @@ module.exports = {
     // Add employees
     await db.collection("employees").insertMany([
       {
-        _id: new mongoose.Types.ObjectId("000000000000000000000001"),
-        firstname: "Billie",
-        lastname: "Some",
+        _id: "000000000000000000000001",
+        firstName: "Billie",
+        lastName: "Some",
         jobTitle: 'Manager',
-        department: 'Sales'
+        department: 'Sales',
         email:"ggggg1@mailinator.com"
       },
       {
-        _id: new mongoose.Types.ObjectId("000000000000000000000002"),
-        firstname: "Lee",
-        lastname: "Leaper",
+        _id: "000000000000000000000002",
+        firstName: "Lee",
+        lastName: "Leaper",
         jobTitle: 'Manager',
-        department: 'Customers success'
+        department: 'Customers success',
         email:"ggggg2@mailinator.com"
       },
       {
-        _id: new mongoose.Types.ObjectId("000000000000000000000003"),
-        firstname: "Jim",
-        lastname: "Halpert",
+        _id: "000000000000000000000003",
+        firstName: "Jim",
+        lastName: "Halpert",
         jobTitle: 'Tester',
-        department: 'Qa'
+        department: 'Qa',
         email:"ggggg3@mailinator.com"
       },
       {
-        _id: new mongoose.Types.ObjectId("000000000000000000000004"),
-        firstname: "Tim",
-        lastname: "Parker",
+        _id: "000000000000000000000004",
+        firstName: "Tim",
+        lastName: "Parker",
         jobTitle: 'Manager',
-        department: 'Sales'
+        department: 'Sales',
         email:"ggggg4@mailinator.com"
       },
       {
-        _id: new mongoose.Types.ObjectId("000000000000000000000006"),
-        firstname: "Sarah",
-        lastname: "Müller",
+        _id: "000000000000000000000006",
+        firstName: "Sarah",
+        lastName: "Müller",
         jobTitle: 'CFO',
-        department: 'Sales'
+        department: 'Sales',
         email:"ggggg5@mailinator.com"
       },
     ]);

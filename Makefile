@@ -22,3 +22,6 @@ build : ## Build docker images
 
 db: ## Start a db for local dev
 	$(dcLocal) up projectb_mongodb
+
+redis: ## Start a redis for local dev
+	$(dcLocal) up redis-server
