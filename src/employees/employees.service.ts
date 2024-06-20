@@ -8,8 +8,9 @@ import { ReadEmployeesQuery } from './queries/impl/read-employees.query';
 import { EditEmployeeCommand } from './commands/impl/edit-employee.command';
 import { DeleteEmployeeCommand } from './commands/impl/delete-employee.command';
 import { CreateEmployeeCommand } from './commands/impl/create-employee.command';
-import { DbPaginatedQuery } from 'src/commons/dto/db-paginated-query.dto';
+import { BrowsePaginatedFEQuery, DbPaginatedQuery } from 'src/commons/dto/db-paginated-query.dto';
 import { CountEmployeesQuery } from './queries/impl/count-employees.query';
+import { QueryUtils } from '../commons/helpers/query.utils';
 
 @Injectable()
 export class EmployeesService {
@@ -18,17 +19,47 @@ export class EmployeesService {
   constructor(
     private commandBus: CommandBus,
     private queryBus: QueryBus,
+    private readonly queryUtils: QueryUtils,
   ) {}
 
   create(createEmployeeDto: CreateEmployeeDto): Promise<void> {
     return this.executeCommand(new CreateEmployeeCommand(createEmployeeDto));
   }
 
-  async findAll(query: DbPaginatedQuery): Promise<any> {
-    // total count number also required for proper pagination
-    const result: Array<Employee> = await this.executeQuery(
-      new BrowseEmployeesQuery(query),
+  async findAll(query: BrowsePaginatedFEQuery): Promise<any> {
+    const args = {
+      ...this.queryUtils.getQueryParams(query),
+    };
+
+    const condition = {
+      $or: [
+        { _id: query.q ? query.q : '' },
+        { email: { $regex: query.q ? query.q : '', $options: 'i' } },
+        { firstName: { $regex: query.q ? query.q : '', $options: 'i' } },
+        { lastName: { $regex: query.q ? query.q : '', $options: 'i' } },
+        { jobTitle: { $regex: query.q ? query.q : '', $options: 'i' } },
+        { department: { $regex: query.q ? query.q : '', $options: 'i' } },
+      ],
+    };
+
+    const data: Array<Employee> = await this.executeQuery(
+      new BrowseEmployeesQuery({
+        where: condition, // Search string
+        offset: args.offset, // based on page
+        limit: args.limit, // max amount of docs to return
+      }),
     );
+
+    const totalCount = await this.countTotal();
+
+    const result = {
+      totalRecords: totalCount,
+      totalPages: Math.ceil(totalCount / args.limit),
+      page: args.page,
+      limit: args.limit,
+      data: [...data],
+    };
+
     return result;
   }
 

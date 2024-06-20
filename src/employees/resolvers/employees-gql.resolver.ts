@@ -22,37 +22,7 @@ export class EmployeesResolver {
   async getEmployees(
     @Args('browseEmployeesInput') query: BrowsePaginatedFEQuerySubGraph,
   ) {
-    // TODO: Logic should be moved to the service.
-    const args = {
-      ...this.queryUtils.getQueryParams(query),
-    };
-
-    const condition = {
-      $or: [
-        { _id: query.q ? query.q : '' },
-        { email: { $regex: query.q ? query.q : '', $options: 'i' } },
-        { firstName: { $regex: query.q ? query.q : '', $options: 'i' } },
-        { lastName: { $regex: query.q ? query.q : '', $options: 'i' } },
-        { jobTitle: { $regex: query.q ? query.q : '', $options: 'i' } },
-        { department: { $regex: query.q ? query.q : '', $options: 'i' } },
-      ],
-    };
-
-    const data = await this.employeesService.findAll({
-      where: condition, // Search string
-      offset: args.offset, // based on page
-      limit: args.limit, // max amount of docs to return
-    });
-
-    const totalCount = await this.employeesService.countTotal();
-
-    const result = {
-      totalRecords: totalCount,
-      totalPages: Math.ceil(totalCount / args.limit),
-      page: args.page,
-      limit: args.limit,
-      data: [...data],
-    };
+    const result = await this.employeesService.findAll(query);
 
     return result;
   }
