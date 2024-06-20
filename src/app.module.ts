@@ -9,6 +9,9 @@ import nodemailer from './config/nodemailer';
 import database from './config/database';
 import { BullModule } from '@nestjs/bull';
 import { EmailsModule } from './emails-handling/email.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -33,6 +36,18 @@ import { EmailsModule } from './emails-handling/email.module';
       useFactory: async (config: ConfigService) => {
         return config.get('redis');
       },
+      inject: [ConfigService],
+    }),
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        path: '/api/projectb/graphql',
+        debug: configService.get('graph-ql-config.debug'),
+        playground: configService.get('graph-ql-config.debug'),
+        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        introspection: true,
+      }),
       inject: [ConfigService],
     }),
     EmployeesModule,

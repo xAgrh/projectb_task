@@ -9,6 +9,7 @@ import { EmployeesQueryHandlers } from './queries/handlers';
 import { EmployeesEventHandlers } from './events/handlers';
 import { CqrsModule } from '@nestjs/cqrs';
 import { UtilsModule } from '../commons/helpers/utils.module';
+import { EmployeesResolver } from './resolvers/employees-gql.resolver';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UtilsModule } from '../commons/helpers/utils.module';
     ...EmployeesCommandHandlers,
     ...EmployeesQueryHandlers,
     ...EmployeesEventHandlers,
+    EmployeesResolver,
   ],
 })
 export class EmployeesModule {}

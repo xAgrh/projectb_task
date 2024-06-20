@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type EmployeeSubGraph {
+  _id: String
+  email: String
+  firstName: String
+  lastName: String
+  jobTitle: String
+  department: String
+}
+
+type BrowsePaginatedFEOutputSubGraph {
+  totalRecords: Float!
+  totalPages: Float!
+  page: Float!
+  limit: Float!
+  data: [EmployeeSubGraph!]!
+}
+
+type deleteEmployee {
+  _id: String!
+}
+
+input deleteEmployeeId {
+  _id: String!
+}
+
+type Query {
+  getEmployees(browseEmployeesInput: browseEmployeeInput!): BrowsePaginatedFEOutputSubGraph!
+  getEmployee(id: String!): EmployeeSubGraph!
+}
+
+input browseEmployeeInput {
+  q: String = ""
+  page: String
+  limit: String
+}
+
+type Mutation {
+  createEmployee(createEmployeeInput: createEmployeeInput!): EmployeeSubGraph!
+  updateEmployee(updateEmployeeId: String!, updateEmployeeInput: updateEmployeeInput!): EmployeeSubGraph!
+  deleteEmployee(deleteEmployeeId: String!): deleteEmployee!
+}
+
+input createEmployeeInput {
+  _id: String
+  email: String!
+  firstName: String
+  lastName: String
+  jobTitle: String
+  department: String
+}
+
+input updateEmployeeInput {
+  email: String
+  firstName: String
+  lastName: String
+  jobTitle: String
+  department: String
+}

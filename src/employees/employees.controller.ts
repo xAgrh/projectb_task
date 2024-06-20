@@ -45,6 +45,7 @@ export class EmployeesController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @Get()
   async findAll(@Query() query: BrowsePaginatedFEQuery) {
+    // TODO: Logic should be moved to the service.
     const args = {
       ...this.queryUtils.getQueryParams(query),
     };

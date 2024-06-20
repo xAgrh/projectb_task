@@ -9,18 +9,18 @@ export class BrowsePaginatedFEQuery {
   q: string = '';
 
   @ApiProperty({
-    example: 1,
+    example: '1',
     required: false,
     description: 'On which page you are currently',
   })
-  page: number;
+  page: string; // TODO: fix type
 
   @ApiProperty({
-    example: 25,
+    example: '25',
     required: false,
     description: 'How many results you want to see for a specific page',
   })
-  limit: number;
+  limit: string; // TODO: fix type
 }
 
 export class DbPaginatedQuery {
